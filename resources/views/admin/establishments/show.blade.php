@@ -80,8 +80,8 @@
     </div>
     
     <div class="row my-4">
-
-        <div class="col-lg-6 col-md-12">
+        @if ($establishment->has_accomodation)
+        <div class="col-lg-6 col-md-12 my-2">
             <div class="card shadow-xs border">
                 <div class="card-header border-bottom pb-0">
                     <div class="d-sm-flex align-items-center mb-3">
@@ -129,7 +129,7 @@
                                     <td class="align-middle">
                                         <div class="d-flex alignt-items-center justify-content-center">
 
-                                            <a href="#" data-bs-toggle="modal" data-bs-target="#editRoomModal"
+                                            <a href="#" data-bs-toggle="modal" data-bs-target="#editCottageModal"
                                                 class="text-secondary font-weight-bold text-xs mx-2"
                                                 data-bs-toggle="tooltip" data-bs-title="Edit Room"
                                                 data-bs-action="{{ route('admin.update.rooms', [$establishment->id, $room->id]) }}"
@@ -163,7 +163,10 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-6 col-md-12">
+        @endif
+
+        @if ($establishment->has_rides)
+        <div class="col-lg-6 col-md-12 my-2">
             <div class="card shadow-xs border">
                 <div class="card-header border-bottom pb-0">
                     <div class="d-sm-flex align-items-center mb-3">
@@ -193,7 +196,7 @@
                                     <th class="text-center text-secondary text-xs font-weight-semibold opacity-7 ps-2"></th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody> 
                                 @foreach ($rides as $ride)
                                 <tr>
                                     <td> 
@@ -235,19 +238,17 @@
                                         </form>
                                     </td>
                                 </tr>
-                                @endforeach
+                                @endforeach 
                             </tbody>
                         </table>
                     </div>
                 </div>
             </div>
         </div>
-        
- 
-    </div>
+        @endif
 
-    <div class="row my-4">
-        <div class="col-lg-6 col-md-12">
+        @if ($establishment->has_venues)    
+        <div class="col-lg-6 col-md-12 my-2">
             <div class="card shadow-xs border">
                 <div class="card-header border-bottom pb-0">
                     <div class="d-sm-flex align-items-center mb-3">
@@ -327,7 +328,9 @@
                 </div>
             </div>
         </div>
-    </div>
+        @endif
+
+    </div> 
 </div>
 
 
@@ -652,6 +655,7 @@
     // Call the function with your modal and form IDs
     setFormActionInModal('#editrideModal', '#editRide'); 
     setFormActionInModal('#editRoomModal', '#editRoom'); 
+    setFormActionInModal('#editCottageModal', '#editCottage'); 
 
 </script>
 @endsection

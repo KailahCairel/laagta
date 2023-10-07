@@ -1,6 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
+@if (session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
+
 <div class="px-5 py-4 container-fluid">
     <div class="row">
         <div class="mx-auto col-lg-9 col-12">
@@ -38,7 +44,7 @@
                             <div class="col-6">
                                 <div class="form-group">
                                     <label class="mt-4 form-label">Phone</label>    
-                                    <input class="form-control" type="text" name="phone" value="{{ old('phone', $establishment->phone) }}">
+                                    <input class="form-control" type="number" name="phone" value="{{ old('phone', $establishment->phone) }}">
                                 </div>
                             </div>
                         </div>
@@ -48,13 +54,13 @@
                             <div class="col-6">
                                 <div class="form-group">
                                     <label class="mt-4 form-label">Adult</label>    
-                                    <input class="form-control" type="text" name="entrance_fee_adult" value="{{ old('entrance_fee_adult', $establishment->entrance_fee_adult) }}">
+                                    <input class="form-control" type="number" name="entrance_fee_adult" value="{{ old('entrance_fee_adult', $establishment->entrance_fee_adult) }}">
                                 </div>
                             </div>
                             <div class="col-6">
                                 <div class="form-group">
                                     <label class="mt-4 form-label">Child</label>    
-                                    <input class="form-control" type="text" name="entrance_fee_child" value="{{ old('entrance_fee_child', $establishment->entrance_fee_child) }}">
+                                    <input class="form-control" type="number" name="entrance_fee_child" value="{{ old('entrance_fee_child', $establishment->entrance_fee_child) }}">
                                 </div>
                             </div>
                         </div>
@@ -74,7 +80,8 @@
                                         <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault"
                                             onclick="notify(this)" data-type="warning"
                                             data-content="Once a project is made private, you cannot revert it to a public project."
-                                            data-title="Warning" data-icon="ni ni-bell-55">
+                                            data-title="Warning" data-icon="ni ni-bell-55"
+                                            name="status">
                                         <label class="form-check-label" for="flexSwitchCheckDefault"></label>
                                     </div>
                                 </div>
@@ -94,7 +101,7 @@
                                             onclick="notify(this)" data-type="warning"
                                             data-content="Once a project is made private, you cannot revert it to a public project."
                                             data-title="Warning" data-icon="ni ni-bell-55"
-                                            name="venues">
+                                            name="has_venues">
                                         <label class="form-check-label" for="flexSwitchCheckDefault"></label>
                                     </div>
                                 </div>
@@ -114,7 +121,7 @@
                                             onclick="notify(this)" data-type="warning"
                                             data-content="Once a project is made private, you cannot revert it to a public project."
                                             data-title="Warning" data-icon="ni ni-bell-55"
-                                            name="accomodation">
+                                            name="has_accomodation">
                                         <label class="form-check-label" for="flexSwitchCheckDefault"></label>
                                     </div>
                                 </div>
@@ -134,7 +141,7 @@
                                             onclick="notify(this)" data-type="warning"
                                             data-content="Once a project is made private, you cannot revert it to a public project."
                                             data-title="Warning" data-icon="ni ni-bell-55"
-                                            name="rides">
+                                            name="has_rides">
                                         <label class="form-check-label" for="flexSwitchCheckDefault"></label>
                                     </div>
                                 </div>

@@ -18,9 +18,9 @@ class Establishment extends Model
         'entrance_fee_adult',
         'entrance_fee_child',
         'status',
-        'accomodation',
-        'venues',
-        'rides',
+        'has_accomodation',
+        'has_venues',
+        'has_rides',
         'destination_id'
     ];
     

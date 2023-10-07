@@ -35,34 +35,33 @@ class EstablishmentController extends Controller
         return view('admin.establishments.create', ['establishment' => $establishment, 'destinations' => $destinations]);
     }
 
+
     public function store(Request $request)
     {
-
-        
         // Validate input
-        $validatedData =  $request->validate([
+        $validatedData = $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'string',
             'location' => 'string|max:255',
-            'destination_id' => 'required',
-            'email' => 'string|max:255',
-            'phone' => 'string|max:255',
-            'entrance_fee_adult' => 'numeric',
-            'entrance_fee_child' => 'numeric',
-            'status' => 'string',
-            'accomodation' => 'string',
-            'venues' => 'string',
-            'rides' => 'string',
-        ]); 
+            'destination_id' => 'required|exists:destinations,id',
+            'email' => 'nullable|string|max:255',
+            'phone' => 'nullable|string|max:255',
+            'entrance_fee_adult' => 'nullable|numeric',
+            'entrance_fee_child' => 'nullable|numeric',
+            'status' => 'nullable|string', // Change the validation rule for status to string
+            'has_accomodation' => 'nullable|string', // Change the validation rule for has_accomodation to string
+            'has_venues' => 'nullable|string', // Change the validation rule for has_venues to string
+            'has_rides' => 'nullable|string', // Change the validation rule for has_rides to string
+        ]);
 
-        $request->accomodation = $request->accomodation === "on" ? 1 : 0;
-        $request->venue = $request->venue === "on" ? 1 : 0;
-        $request->rides = $request->rides === "on" ? 1 : 0;
+        // Convert "on" to true, and any other value to false for boolean fields
+        $validatedData['status'] = $request->input('status') === 'on' ? true : false;
+        $validatedData['has_accomodation'] = $request->input('has_accomodation') === 'on' ? true : false;
+        $validatedData['has_venues'] = $request->input('has_venues') === 'on' ? true : false;
+        $validatedData['has_rides'] = $request->input('has_rides') === 'on' ? true : false;
 
-        dd($request);
-        
         // Create a new establishment using the validated data
-        $establishment = Establishment::create( $validatedData );
+        $establishment = Establishment::create($validatedData);
 
         // Upload and associate multiple images with the establishment
         if ($request->hasFile('images')) {
@@ -73,11 +72,12 @@ class EstablishmentController extends Controller
         }
         
         $establishment->destination()->associate($request->input('destination_id'));
-        
 
         // Redirect to the appropriate page (e.g., show the created establishment)
-        return redirect()->route('admin.establishments.show', $establishment->id);
+        return redirect()->route('admin.establishments.show', $establishment->id)
+                        ->with('success', 'Establishment created successfully.');
     }
+
 
 
     public function show(string $id)
@@ -101,7 +101,6 @@ class EstablishmentController extends Controller
     {
         // Retrieve the specific establishment based on the provided $id
         $establishment = Establishment::findOrFail($id);
-        dd($establishment);
 
         $destinations = Destination::where('status', 1)->get();
         $images       = $establishment->images;
@@ -109,22 +108,31 @@ class EstablishmentController extends Controller
         return view('admin.establishments.edit', compact('establishment', 'destinations', 'images'));
     }
 
-
     public function update(Request $request, string $id)
     {
-        
-        $request->venues = $request->venues === "on" ? 1:0; 
-        $request->accomodation = $request->accomodation === "on" ? 1:0; 
-        $request->rides = $request->rides === "on" ? 1:0; 
-        
-        // dd($request);
-
-        // Validate the incoming request data
+        // Validate input
         $validatedData = $request->validate([
-            // Define validation rules for your establishment fields here
+            'name' => 'required|string|max:255',
+            'description' => 'string',
+            'location' => 'string|max:255',
+            'destination_id' => 'required|exists:destinations,id',
+            'email' => 'nullable|string|max:255',
+            'phone' => 'nullable|string|max:255',
+            'entrance_fee_adult' => 'nullable|numeric',
+            'entrance_fee_child' => 'nullable|numeric',
+            'status' => 'nullable|string', // Change the validation rule for status to string
+            'has_accomodation' => 'nullable|string', // Change the validation rule for has_accomodation to string
+            'has_venues' => 'nullable|string', // Change the validation rule for has_venues to string
+            'has_rides' => 'nullable|string', // Change the validation rule for has_rides to string
         ]);
 
-        // Retrieve the specific establishment based on the provided $id
+        // Convert "on" to true, and any other value to false for boolean fields
+        $validatedData['status'] = $request->input('status') === 'on' ? true : false;
+        $validatedData['has_accomodation'] = $request->input('has_accomodation') === 'on' ? true : false;
+        $validatedData['has_venues'] = $request->input('has_venues') === 'on' ? true : false;
+        $validatedData['has_rides'] = $request->input('has_rides') === 'on' ? true : false;
+
+        // Find the establishment by its ID
         $establishment = Establishment::findOrFail($id);
 
         // Update the establishment with the validated data
@@ -141,8 +149,10 @@ class EstablishmentController extends Controller
         $establishment->destination()->associate($request->input('destination_id'));
 
         // Redirect to the appropriate page (e.g., show the updated establishment)
-        return redirect()->route('admin.establishments.show', $establishment->id);
+        return redirect()->route('admin.establishments.show', $establishment->id)
+                        ->with('success', 'Establishment updated successfully.');
     }
+
 
 
     public function destroy(string $id)

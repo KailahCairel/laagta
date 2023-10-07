@@ -26,9 +26,9 @@ return new class extends Migration
             $table->unsignedBigInteger('destination_id');
             $table->boolean('status')->default(true);
             
-            $table->boolean('accomodation')->default(true);
-            $table->boolean('venues')->default(true);
-            $table->boolean('rides')->default(true);
+            $table->boolean('has_accomodation')->default(true);
+            $table->boolean('has_venues')->default(true);
+            $table->boolean('has_rides')->default(true);
             // Add more fields as needed
             $table->timestamps();
 

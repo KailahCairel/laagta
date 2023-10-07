@@ -78,7 +78,8 @@
                                         <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault"
                                             onclick="notify(this)" data-type="warning"
                                             data-content="Once a project is made private, you cannot revert it to a public project."
-                                            data-title="Warning" data-icon="ni ni-bell-55" {{ $destination->status ? 'checked':'' }}>
+                                            data-title="Warning" data-icon="ni ni-bell-55" {{ $establishment->status ? 'checked':'' }}
+                                            name="status">
                                         <label class="form-check-label" for="flexSwitchCheckDefault"></label>
                                     </div>
                                 </div>
@@ -98,8 +99,8 @@
                                         <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault"
                                             onclick="notify(this)" data-type="warning"
                                             data-content="Once a project is made private, you cannot revert it to a public project."
-                                            data-title="Warning" data-icon="ni ni-bell-55" {{ $destination->venues ? 'checked':'' }}
-                                            name="venues">
+                                            data-title="Warning" data-icon="ni ni-bell-55" {{ $establishment->has_venues ? 'checked':'' }}
+                                            name="has_venues">
                                         <label class="form-check-label" for="flexSwitchCheckDefault"></label>
                                     </div>
                                 </div>
@@ -118,8 +119,8 @@
                                         <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault"
                                             onclick="notify(this)" data-type="warning"
                                             data-content="Once a project is made private, you cannot revert it to a public project."
-                                            data-title="Warning" data-icon="ni ni-bell-55" {{ $destination->accomodation ? 'checked':'' }}
-                                            name="accomodation">
+                                            data-title="Warning" data-icon="ni ni-bell-55" {{ $establishment->has_accomodation ? 'checked':'' }}
+                                            name="has_accomodation">
                                         <label class="form-check-label" for="flexSwitchCheckDefault"></label>
                                     </div>
                                 </div>
@@ -138,8 +139,8 @@
                                         <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault"
                                             onclick="notify(this)" data-type="warning"
                                             data-content="Once a project is made private, you cannot revert it to a public project."
-                                            data-title="Warning" data-icon="ni ni-bell-55" {{ $destination->rides ? 'checked':'' }}
-                                            name="rides">
+                                            data-title="Warning" data-icon="ni ni-bell-55" {{ $establishment->has_rides ? 'checked':'' }}
+                                            name="has_rides">
                                         <label class="form-check-label" for="flexSwitchCheckDefault"></label>
                                     </div>
                                 </div>
