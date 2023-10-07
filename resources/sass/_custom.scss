@@ -1,0 +1,54 @@
+.avatar {
+    img {
+        height: 100%;
+        object-fit: cover;
+    }
+}
+
+section {
+    position: relative;
+
+    &#establishments {
+        .card {
+            .card-body {
+
+                img {
+                    display: block;
+                    width: 100%;
+                    height: 250px;
+                    border-radius: 15px;
+                    margin: 10px 0;
+                }
+            }
+        }
+    }
+}
+
+ 
+#find-establishments {
+    position: fixed;
+    right: 0;
+    top: 0;
+    bottom: 0;
+
+    height: 40px;
+    
+    margin: auto;
+
+    border-radius: 0;
+
+    
+
+    > span {
+        display: none;
+
+        transition: all ease 300ms;
+    }
+
+    &:hover { 
+
+        > span {
+            display: block;
+        }
+    }
+} 
