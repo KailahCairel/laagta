@@ -149,7 +149,10 @@
       $("#categories").on('change', function(){
         selected = $(this).val()
 
-        if(selected === "accomodation"){
+
+        console.log(selected);
+
+        if(selected === "accommodation"){
           $("#numberOfDaysCont").show();
         }else{
           $("#numberOfDaysCont").hide();

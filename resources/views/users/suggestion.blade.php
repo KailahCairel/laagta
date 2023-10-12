@@ -63,6 +63,11 @@
                             @php
                                 $totalPersons = $adults + $children;
                                 $totalRidesPrice = 0;
+                                $totalEntranceFeeAdult = $adults * $establishment->entrance_fee_adult;
+                                $totalEntranceFeeChild = $children * $establishment->entrance_fee_child;
+
+
+                                $totalEntranceFee = $totalEntranceFeeAdult + $totalEntranceFeeChild;
                             @endphp
 
                             @if ($categories == 'rides')
@@ -74,19 +79,28 @@
                                             $formattedPricePerPerson = number_format($pricePerPerson, 2); // Format to 2 decimal places
                                             $totalRidesPrice += $pricePerPerson;
                                         @endphp
-                                        <div>
-                                            <p><strong>Name:</strong> {{ $ride->name }}</p>
-                                            <p><strong>Price per Person:</strong> {{ $totalPersons }} x ₱{{ $ride->price }} </p>
-                                            <p><strong>Total Price:</strong> ₱{{ $formattedPricePerPerson }}</p>
-                                        </div>
-
-                                        <hr>
+                                        <div class="card my-2">
+                                          <div class="card-body">
+                                            <p>Name: <strong>{{ $ride->name }}</strong></p>
+                                            <p>Price per Person: <strong>{{ $totalPersons }} x ₱{{ $ride->price }}</strong> </p>
+                                            <p>Total Price: <strong>₱{{ $formattedPricePerPerson }}</strong></p>
+                                          </div>
+                                        </div> 
+                                        
                                     @endforeach
+                                      <div class="mt-4 alert alert-primary">
 
-                                    <p><strong>Total Rides Price:</strong> ₱{{ number_format($totalRidesPrice, 2) }}</p>
-                                    
-                                    @if ($totalRidesPrice > $budget)
-                                        <p class="text-warning">Note: Please be aware that some of the rides exceed your budget. You have the option to enjoy some of the rides, but not all of them.</p>
+                                        <p>Total Rides Price: <strong>₱{{ number_format($totalRidesPrice, 2) }}</strong></p>
+                                        <p>Total Entrance Fee: <strong>₱{{ number_format($totalEntranceFee, 2) }}</strong></p>
+                                        
+                                        <p>Total Expenses: <strong>₱{{ number_format($totalRidesPrice + $totalEntranceFee, 2) }}</strong></p>
+                                        <p>Savings: <strong>₱{{ number_format($budget - ($totalRidesPrice + $totalEntranceFee), 2) }}</strong></p>
+                                        
+                                      </div>
+                                    @if (($totalRidesPrice + $totalEntranceFee)  > $budget)
+                                        <div class="alert alert-warning">
+                                          <p class="text-warning">Note: Please be aware that some of the rides exceed your budget. You have the option to enjoy some of the rides, but not all of them.</p>
+                                        </div>
                                     @endif
                                 </div>
                             @endif
@@ -95,8 +109,10 @@
 
                             @if ($categories == 'accommodation')
                                 <div class="d-flex flex-column">
-                                  
-
+                                    @php
+                                        $counter = 0;
+                                    @endphp
+                                
                                     @if ($totalPersons <= 0)
                                         <p>No accommodations available for the selected number of persons.</p>
                                     @else
@@ -105,18 +121,38 @@
                                                 $price = $accommodation->price;
                                                 $budget = $budget;
 
-                                                if ($accommodation->capacity <= $totalPersons || $accommodation->price >= $budget) {
-                                                    continue;
+                                                
+                                                if(($accommodation->price * $numberofdays) + $totalEntranceFee >= $budget) {
+                                                  continue;
                                                 }
+
+                                                $counter++; 
+
                                             @endphp
-                                            <div>
-                                                <p><strong>Name:</strong> {{ $accommodation->name }}</p>
-                                                <p><strong>Capacity:</strong> {{ $accommodation->capacity }}</p>
-                                                <p><strong>Price:</strong> ₱{{ $accommodation->price }}</p>
+
+                                            <div class="card">
+                                                <div class="card-body">
+
+                                                  <p>Name: <strong>{{ $accommodation->name }}</strong></p>
+                                                  <p>Capacity:<strong> {{ $accommodation->capacity }}</strong></p>
+                                                  <p>Price: <strong> {{$numberofdays}} x ₱{{ $accommodation->price }}</strong></p>
+                                                  
+                                            <hr>
+
+                                                  <p>Total Room Price: <strong>₱{{ $numberofdays * $accommodation->price }}  </strong></p>
+                                                  <p>Total Entrance Fee: <strong>₱{{ number_format($totalEntranceFee, 2) }}</strong></p>
+                                                  
+                                                  <p>Total Expenses: <strong>₱{{ number_format($totalEntranceFee + ($accommodation->price * $numberofdays), 2) }}</strong></p>
+
+                                                  <p>Savings: <strong>₱{{ number_format($budget - ($totalEntranceFee + ($accommodation->price * $numberofdays)), 2) }}</strong></p>
+                                                </div>
                                             </div>
 
-                                            <hr>
-                                        @endforeach
+                                        @endforeach 
+
+                                        @if ($counter == 0)
+                                            <p class="text-danger">You budget is less than the total payable amount. </p>
+                                        @endif
                                     @endif
                                 </div>
                             @endif

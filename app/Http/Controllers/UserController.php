@@ -143,13 +143,12 @@ class UserController extends Controller
 
         // Query establishments based on criteria
         $establishments = Establishment::where('status', 1)
-            ->where('destination_id', 1)
+            ->where('destination_id', $destinationId)
             ->where($arr)
             ->get();
 
         $destination = Destination::findOrFail($destinationId);
 
- 
 
         // Pass the variables to the 'users.suggestion' view
         return view('users.suggestion', compact('destination', 'categories', 'numberofdays', 'adults', 'children', 'budget', 'establishments'));
