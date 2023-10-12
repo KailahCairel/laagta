@@ -67,4 +67,8 @@ Route::middleware(['auth', 'role:user'])->prefix('user')->name('user.')->group(f
     Route::get('/profile', [App\Http\Controllers\UserController::class, 'profile'])->name('profile');
     Route::put('/profile/update', [App\Http\Controllers\UserController::class, 'updateProfile'])->name('profile.update');
     Route::put('/password/update', [App\Http\Controllers\UserController::class, 'changePassword'])->name('profile.password');
+
+
+    Route::post('/process-form', [App\Http\Controllers\UserController::class, 'processForm'])->name('process-form');
+
 });

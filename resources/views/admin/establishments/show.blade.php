@@ -28,8 +28,20 @@
             <div class="card shadow-xs border">
                 <div class="card-body">
                     <h6 class="font-weight-semibold text-lg mb-0">Description</h6>
-                    <div class="py-4">
+                    <div class="pb-4">
                         {!! $establishment->description !!}
+                    </div>
+
+                    <h6>Contact Information</h6>
+                    <div class="pb-4">
+                        <p><span>Phone: {{ $establishment->phone }}</span></p>
+                        <p><span>Email: {{ $establishment->email }}</span></p>
+                    </div>
+
+                    <h6>Entrance Fee</h6>
+                    <div class="pb-4">
+                        <p><span>Adult: </span> PHP {{ $establishment->entrance_fee_adult }}</p>
+                        <p><span>Child: </span> PHP {{ $establishment->entrance_fee_child }}</p>
                     </div>
 
                 </div>
@@ -54,7 +66,7 @@
                                                 <div class="card-body text-start px-3 py-0 w-100">
                                                     <div class="row mt-12">
                                                         <div class="col-sm-3 mt-auto">
-                                                            <h4 class="text-dark font-weight-bolder">#{{ $key + 1 }}</h4>
+                                                            {{-- <h4 class="text-dark font-weight-bolder">#{{ $key + 1 }}</h4> --}}
                                                             
                                                         </div> 
                                                     </div>
@@ -129,7 +141,7 @@
                                     <td class="align-middle">
                                         <div class="d-flex alignt-items-center justify-content-center">
 
-                                            <a href="#" data-bs-toggle="modal" data-bs-target="#editCottageModal"
+                                            <a href="#" data-bs-toggle="modal" data-bs-target="#editModal"
                                                 class="text-secondary font-weight-bold text-xs mx-2"
                                                 data-bs-toggle="tooltip" data-bs-title="Edit Room"
                                                 data-bs-action="{{ route('admin.update.rooms', [$establishment->id, $room->id]) }}"

@@ -103,4 +103,55 @@ class UserController extends Controller
         return redirect()->route('user.profile')->with('success', 'Password changed successfully');
     }
 
+    public function processForm(Request $request)
+    {
+        $destinationId = $request->input('location');
+        $categories = $request->input('categories');
+        $adults = $request->input('adults');
+        $children = $request->input('childs');
+        $budget = $request->input('budget');
+
+        // Initialize $numberofdays to null
+        $numberofdays = null;
+
+        // Check if 'categories' is 'accommodation' to retrieve 'numberofdays'
+        if ($categories === 'accommodation') {
+            $numberofdays = $request->input('numberofdays');
+        }
+
+        // Initialize the $arr with an empty array
+        $arr = [];
+
+        // Use a switch statement to conditionally add filters based on $categories
+        switch ($categories) {
+            case 'accommodation':
+                $arr['has_accomodation'] = 1;
+                break;
+
+            case 'rides':
+                $arr['has_rides'] = 1;
+                break;
+
+            case 'venues':
+                $arr['has_venues'] = 1;
+                break;
+
+            default:
+                break;
+        }
+   
+
+        // Query establishments based on criteria
+        $establishments = Establishment::where('status', 1)
+            ->where('destination_id', 1)
+            ->where($arr)
+            ->get();
+
+        $destination = Destination::findOrFail($destinationId);
+
+ 
+
+        // Pass the variables to the 'users.suggestion' view
+        return view('users.suggestion', compact('destination', 'categories', 'numberofdays', 'adults', 'children', 'budget', 'establishments'));
+    }
 }

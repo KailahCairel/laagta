@@ -34,7 +34,9 @@
               <div class="card-header py-0"> <h4>{{ $establishment->name }}</h4> </div>
               <div class="card-body"> 
                     
-                  <img src="{{ asset('storage/' . $establishment->images[0]->image_path) }}" alt="">   
+                 @if (count($establishment->images) > 0)
+                    <img src="{{ asset('storage/' . $establishment->images[0]->image_path) }}" alt="">   
+                 @endif
    
   
                   <p>{{ Str::limit($establishment->description, 150) }}</p>
@@ -70,7 +72,7 @@
               </div>
               <div class="modal-body">
 
-                  <form method="POST" action="{{ route('admin.store.rides', $establishment) }}" id="createService">
+                  <form method="POST" action="{{ route('user.process-form') }}" id="createService">
                       @csrf
                       <div class="d-flex gap-2 justify-content-between">
                         <div class="form-group col-6">
@@ -89,26 +91,28 @@
                         <div class="form-group col-6">
                             <label for="categories">Services</label> 
                             <select  class="form-control" name="categories" id="categories">
-                              <option value="room">Accomodation</option>
+                              <option value="accommodation">Accomodation</option>
                               <option value="rides">Rides</option>
-                              <option value="cottage">Swimming</option>
+                              <option value="venue">Venue</option>
                             </select>
                         </div>
                       </div>
  
-                      <div class="col-auto form-group">
+                      {{-- If accomodation is selected --}}
+                      <div class="col-auto form-group" id="numberOfDaysCont">
                           <label for="numberofdays">Length of Stay</label>
                           <input type="number" class="form-control" name="numberofdays" id="numberofdays" required />
-                      </div> 
+                      </div>
+
 
                       <div class="d-flex ms-auto justify-content-between gap-2">
                           <div class="col-auto form-group">
                               <label for="adults">Number of adults</label>
-                              <input type="number" class="form-control" name="adults" id="adults" required />
+                              <input type="number" class="form-control" name="adults" id="adults" value="0" required />
                           </div>
                           <div class="col-auto form-group">
                               <label for="childs">Number of childrens</label>
-                              <input type="number" class="form-control" name="childs" id="childs" required />
+                              <input type="number" class="form-control" name="childs" id="childs" value="0" required/>
                           </div>
                       </div> 
 
@@ -137,5 +141,24 @@
 
 @section('scripts')
 <script src="{{ asset('/assets/js/plugins/swiper-bundle.min.js') }}" crossorigin="anonymous"></script>
+<script src="{{ asset('/assets/js/jquery.min.js') }}" crossorigin="anonymous"></script>
+<script>
+
+  
+  $(document).ready(function(){
+      $("#categories").on('change', function(){
+        selected = $(this).val()
+
+        if(selected === "accomodation"){
+          $("#numberOfDaysCont").show();
+        }else{
+          $("#numberOfDaysCont").hide();
+          $("#numberofdays").val(0);
+
+        }
+      })
+  })
+
+</script>
  
 @endsection
