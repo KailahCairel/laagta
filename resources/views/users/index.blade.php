@@ -28,7 +28,7 @@
     <section id="establishments">
       <div class="row mt-6 mb-6" >
         @foreach ($establishments as $establishment)
-          <div class="col-lg-4 col-sm-6 ">
+          <div class="col-lg-4 col-sm-6 my-2">
   
             <div class="card">
               <div class="card-header py-0"> <h4>{{ $establishment->name }}</h4> </div>

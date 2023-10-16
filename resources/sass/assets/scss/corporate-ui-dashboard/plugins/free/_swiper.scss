@@ -612,9 +612,7 @@ button.swiper-pagination-bullet {
     backface-visibility: hidden;
     overflow: hidden;
 }
-
-// Creative Tim changes
-
+ 
 @include media-breakpoint-up(sm) {
   .swiper {
     width: 600px;

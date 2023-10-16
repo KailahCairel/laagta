@@ -1,17 +1,3 @@
-<!--
-=========================================================
-* Corporate UI - v1.0.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/corporate-ui
-* Copyright 2022 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://www.creative-tim.com/license)
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
--->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -88,28 +74,21 @@
                           © <script>
                               document.write(new Date().getFullYear())
 
-                          </script>2023
-                          Corporate UI by
-                          <a href="https://www.creative-tim.com" class="text-secondary" target="_blank">Creative Tim</a>.
+                          </script>
+                           
+                          <a href="#" class="text-secondary" target="_blank">Suroyta</a>.
                       </div>
                   </div>
                   <div class="col-lg-6">
                       <ul class="nav nav-footer justify-content-center justify-content-lg-end">
+                          
                           <li class="nav-item">
-                              <a href="https://www.creative-tim.com" class="nav-link text-xs text-muted"
-                                  target="_blank">Creative Tim</a>
-                          </li>
-                          <li class="nav-item">
-                              <a href="https://www.creative-tim.com/presentation" class="nav-link text-xs text-muted"
+                              <a href="#" class="nav-link text-xs text-muted"
                                   target="_blank">About Us</a>
                           </li>
                           <li class="nav-item">
-                              <a href="https://www.creative-tim.com/blog" class="nav-link text-xs text-muted"
+                              <a href="#" class="nav-link text-xs text-muted"
                                   target="_blank">Blog</a>
-                          </li>
-                          <li class="nav-item">
-                              <a href="https://www.creative-tim.com/license" class="nav-link text-xs pe-0 text-muted"
-                                  target="_blank">License</a>
                           </li>
                       </ul>
                   </div>
