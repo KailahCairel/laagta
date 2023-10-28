@@ -105,6 +105,9 @@ class UserController extends Controller
 
     public function processForm(Request $request)
     {
+
+        $destinations = Destination::where('status', '1')->get();
+
         $destinationId = $request->input('location');
         $categories = $request->input('categories');
         $adults = $request->input('adults');
@@ -151,6 +154,6 @@ class UserController extends Controller
 
 
         // Pass the variables to the 'users.suggestion' view
-        return view('users.suggestion', compact('destination', 'categories', 'numberofdays', 'adults', 'children', 'budget', 'establishments'));
+        return view('users.suggestion', compact('request', 'destinations', 'destination', 'destinationId', 'categories', 'numberofdays', 'adults', 'children', 'budget', 'establishments'));
     }
 }

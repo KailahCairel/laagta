@@ -1251,7 +1251,7 @@ $card-spacer-y:                     $spacer !default;
 $card-spacer-x:                     $spacer !default;
 $card-title-spacer-y:               $spacer * 0.5 !default;
 $card-border-width:                 0 !default;
-$card-border-radius:                0.375rem !default;
+$card-border-radius:                25px !default;
 $card-border-color:                 rgba($black, .125) !default;
 $card-inner-border-radius:          subtract($card-border-radius, $card-border-width) !default;
 $card-cap-padding-y:                $card-spacer-y * 0.5 !default;

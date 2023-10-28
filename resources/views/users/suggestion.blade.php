@@ -1,47 +1,63 @@
 @extends('layouts.app')
 
 @section('content') 
-  <div class="pt-5 pb-6 bg-cover" style="background-image: url('{{asset('/assets/img/header-blue-purple.jpg')}}')"></div>
-
-  <div class="container my-3 py-3" id="user">
+  @include('users.inc.findEstablishments')
+ 
+     
+  <div class="container my-3 py-3" id="user">   
      
     <section id="establishments">
-      <div class="row">
-        <div class="col-lg-12 col-sm-12">
-            
-            <div class="card">
-                
-                <div class="card-body">
-                    <h4>Search Query: </h4>
-                    <span class="d-block"><strong>Destination:</strong> {{ $destination->name }}</span>
-                    <span class="d-block"><strong>Categories:</strong> {{ $categories }}</span>
-                    <span class="d-block"><strong>Budget:</strong> ₱{{ $budget }}</span>
-                    <span class="d-block"><strong>Number of adults:</strong> {{ $adults }}</span>
-                    <span class="d-block"><strong>Number of childrens:</strong> {{ $children }}</span>
-                    @if ( $numberofdays )
-                    <span class="d-block"><strong>Number of Days:</strong> {{ $numberofdays }}</span>
-                    @endif
-
-                </div>
-            </div>
-
-        </div>
-      </div>
-      <div class="row mt-6 mb-6" > 
+      
+      <div class="row mb-6" > 
         @foreach ($establishments as $establishment)
-          <div class="col-lg-4 col-sm-6 ">
-  
-            <div class="card">
+          @php
+              $totalPersons = $adults + $children;
+              $totalRidesPrice = 0;
+              $totalEntranceFeeAdult = $adults * $establishment->entrance_fee_adult;
+              $totalEntranceFeeChild = $children * $establishment->entrance_fee_child;
+
+
+              $totalEntranceFee = $totalEntranceFeeAdult + $totalEntranceFeeChild;
+
+              if ($categories == 'accommodation') { 
+                  $counter = 0;
+
+                  foreach ($establishment->rooms as $accommodation): 
+                    $price = $accommodation->price;
+                    $budget = $budget;
+
+                    if(($accommodation->price * $numberofdays) + $totalEntranceFee >= $budget) {
+                      continue;
+                    }
+
+                    if($totalPersons > $accommodation->capacity) {
+                      continue;
+                    }
+
+                    $counter++; 
+
+                  endforeach;
+
+                  if ($counter == 0) {
+
+                    continue;
+                  }
+              }
+          @endphp
+          
+          <div class="col-lg-4 col-sm-6 my-2">
+    
+            <div class="card"> 
               <div class="card-header py-0"> <h4>{{ $establishment->name }}</h4> </div>
               <div class="card-body"> 
- 
-                @if (count($establishment->images) > 0)
+                    
+                 @if (count($establishment->images) > 0)
                     <img src="{{ asset('storage/' . $establishment->images[0]->image_path) }}" alt="">   
-                @endif 
+                 @endif
+   
+                <h4>{{ $establishment->name }}</h4>  
 
                 <p>{{ Str::limit($establishment->description, 150) }}</p>
-
-                
               </div>
               <div class="card-footer">
                 <button class="btn btn-primary view-details" data-bs-toggle="modal" data-bs-target="#detailsModal{{ $establishment->id }}">View Details</button>
@@ -121,8 +137,12 @@
                                                 $price = $accommodation->price;
                                                 $budget = $budget;
 
-                                                
+                                            
                                                 if(($accommodation->price * $numberofdays) + $totalEntranceFee >= $budget) {
+                                                  continue;
+                                                }
+
+                                                if($totalPersons > $accommodation->capacity) {
                                                   continue;
                                                 }
 
@@ -130,14 +150,14 @@
 
                                             @endphp
 
-                                            <div class="card">
+                                            <div class="card my-2">
                                                 <div class="card-body">
 
                                                   <p>Name: <strong>{{ $accommodation->name }}</strong></p>
                                                   <p>Capacity:<strong> {{ $accommodation->capacity }}</strong></p>
                                                   <p>Price: <strong> {{$numberofdays}} x ₱{{ $accommodation->price }}</strong></p>
                                                   
-                                            <hr>
+                                                  <hr>
 
                                                   <p>Total Room Price: <strong>₱{{ $numberofdays * $accommodation->price }}  </strong></p>
                                                   <p>Total Entrance Fee: <strong>₱{{ number_format($totalEntranceFee, 2) }}</strong></p>
@@ -148,11 +168,12 @@
                                                 </div>
                                             </div>
 
-                                        @endforeach 
+                                          @endforeach
 
-                                        @if ($counter == 0)
-                                            <p class="text-danger">You budget is less than the total payable amount. </p>
-                                        @endif
+                                          @if ($counter == 0) 
+                                              <p class="text-danger">You budget is less than the total payable amount. </p>
+                                          @endif
+
                                     @endif
                                 </div>
                             @endif
@@ -168,6 +189,19 @@
 
           </div>
         @endforeach
+
+        @if ($categories == 'accommodation') 
+          @if ($counter == 0) 
+            <div class="col-12">
+
+              <div class="alert alert-warning">
+                <p>
+                  "Apologies, but we couldn't find any results matching your search criteria. You might want to refine your search parameters, or it's possible that your budget is lower than the prices offered by the establishments. Thank you for understanding."
+                </p>
+              </div>
+            </div>
+          @endif
+        @endif
       </div>
     </section>
   </div>  

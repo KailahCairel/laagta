@@ -83,13 +83,17 @@
                       <ul class="nav nav-footer justify-content-center justify-content-lg-end">
                           
                           <li class="nav-item">
-                              <a href="#" class="nav-link text-xs text-muted"
+                              <a href="{{ route('about') }}" class="nav-link text-xs text-muted"
                                   target="_blank">About Us</a>
-                          </li>
+                          </li> 
                           <li class="nav-item">
-                              <a href="#" class="nav-link text-xs text-muted"
-                                  target="_blank">Blog</a>
-                          </li>
+                              <a href="{{ route('terms') }}" class="nav-link text-xs text-muted"
+                                  target="_blank">Terms and Condition</a>
+                          </li> 
+                          <li class="nav-item">
+                              <a href="{{ route('privacy') }}" class="nav-link text-xs text-muted"
+                                  target="_blank">Privacy Policy</a>
+                          </li> 
                       </ul>
                   </div>
               </div>

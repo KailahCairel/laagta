@@ -1,6 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\SocialController;
+
+
+// Facebook Login Route
+Route::get('/login/{provider}', [SocialController::class, 'redirectToProvider']);
+Route::get('/login/{provider}/callback', [SocialController::class, 'handleProviderCallback']);
 
 /*
 |--------------------------------------------------------------------------
@@ -72,3 +78,15 @@ Route::middleware(['auth', 'role:user'])->prefix('user')->name('user.')->group(f
     Route::post('/process-form', [App\Http\Controllers\UserController::class, 'processForm'])->name('process-form');
 
 });
+
+Route::get('about-us', function() {
+    return view('about');
+})->name('about');
+
+Route::get('terms-and-condition', function() {
+    return view('terms');
+})->name('terms');
+
+Route::get('privacy-policy', function() {
+    return view('privacy');
+})->name('privacy');

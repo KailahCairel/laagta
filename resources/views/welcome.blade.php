@@ -33,7 +33,7 @@
 
             <div class="max-w-7xl mx-auto p-6 lg:p-8">
                 <div class="flex justify-center">
-                     <img src="{{ asset('imgs/logo.png') }}" alt="">
+                     <img src="{{ asset('imgs/intro-logo.png') }}" alt="" style="max-height: 80vh">
                 </div>
  
             </div>

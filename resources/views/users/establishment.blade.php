@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="pt-5 pb-6 bg-cover" style="background-image: url('{{asset('/assets/img/header-blue-purple.jpg')}}')"></div>
+<div class="pt-5 pb-6 bg-cover bg-cover-custom" style="background-image: url('{{asset('/imgs/manolofortich.jpg')}}')"></div>
 <div class="container my-3 py-3">
      
     <div class="row">

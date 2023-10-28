@@ -24,7 +24,7 @@
 <body class="g-sidenav-show bg-gray-100">
   <div class="main-content position-relative bg-gray-100 max-height-vh-100 h-100">
     <!-- Sidenav Top -->
-    <nav class="navbar bg-slate-900 navbar-expand-lg flex-wrap top-0 px-0 py-0">
+    <nav class="navbar bg-primary navbar-expand-lg flex-wrap top-0 px-0 py-0">
       <div class="container py-2">
         <nav aria-label="breadcrumb">
           <div class="d-flex align-items-center">
@@ -564,7 +564,7 @@
           <p class="text-sm">Choose between 2 different sidenav types.</p>
         </div>
         <div class="d-flex">
-          <button class="btn bg-gradient-primary w-100 px-3 mb-2 active" data-class="bg-slate-900" onclick="sidebarType(this)">Dark</button>
+          <button class="btn bg-gradient-primary w-100 px-3 mb-2 active" data-class="bg-primary " onclick="sidebarType(this)">Dark</button>
           <button class="btn bg-gradient-primary w-100 px-3 mb-2 ms-2" data-class="bg-white" onclick="sidebarType(this)">White</button>
         </div>
         <p class="text-sm d-xl-none d-block mt-2">You can change the sidenav type just on desktop view.</p>

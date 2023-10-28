@@ -6,7 +6,7 @@
     <div class="my-4 row">
         <div class="col-12">
             <div class="card">
-                <img src="../../assets/img/header-blue-purple.jpg" alt="pattern-lines"
+                <img src="{{asset('/assets/img/header-blue-purple.jpg')}}" alt="pattern-lines"
                     class="top-0 rounded-2 position-absolute start-0 w-100 h-100">
                 <div class="px-4 bg-cover card-body z-index-1">
                     <div class="row">

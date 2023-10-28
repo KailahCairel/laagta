@@ -124,6 +124,13 @@
                             <button type="submit" class="btn btn-dark w-100 mt-4 mb-3">{{ __('Login') }}</button>
                              
                         </div>
+                        <div class="d-flex justify-content-between flex-column p-0 gap-2">
+                                <!-- Facebook Login Button -->
+                                <a href="/login/facebook" class="social-button"> <i class="fa fa-facebook"></i> Login with Facebook</a>
+
+                                    <!-- Google Login Button -->
+                                <a href="/login/google" class="social-button google-button"> <i class="fa fa-google"></i> Login with Google</a>
+                        </div>
                         </form>
                     </div>
                     <div class="card-footer text-center pt-0 px-lg-2 px-1">

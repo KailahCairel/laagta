@@ -24,10 +24,7 @@
                   <h6 class="font-weight-semibold text-lg mb-0">Destinations</h6>
                   <p class="text-sm mb-sm-0 mb-2">List of all the available destinations</p>
                 </div>
-                <div class="ms-auto d-flex">
-                  <button type="button" class="btn btn-sm btn-white mb-0 me-2">
-                    View report
-                  </button>
+                <div class="ms-auto d-flex"> 
                   <a href="{{ route('admin.destinations.create') }}" class="btn btn-sm btn-primary btn-icon d-flex align-items-center mb-0 gap-2">
                     <span class="btn-inner--icon">
                       +
@@ -36,24 +33,7 @@
                   </a>
                 </div>
               </div>
-              <div class="pb-3 d-sm-flex align-items-center">
-                <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-                  <input type="radio" class="btn-check" name="btnradiotable" id="btnradiotable1" autocomplete="off" checked>
-                  <label class="btn btn-white px-3 mb-0" for="btnradiotable1">All</label>
-                  <input type="radio" class="btn-check" name="btnradiotable" id="btnradiotable2" autocomplete="off">
-                  <label class="btn btn-white px-3 mb-0" for="btnradiotable2">Active</label>
-                  <input type="radio" class="btn-check" name="btnradiotable" id="btnradiotable3" autocomplete="off">
-                  <label class="btn btn-white px-3 mb-0" for="btnradiotable3">Inactive</label>
-                </div>
-                <div class="input-group w-sm-25 ms-auto">
-                  <span class="input-group-text text-body">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"></path>
-                    </svg>
-                  </span>
-                  <input type="text" class="form-control" placeholder="Search">
-                </div>
-              </div>
+               
             </div>
             <div class="card-body px-0 py-0">
               <div class="table-responsive p-0">
