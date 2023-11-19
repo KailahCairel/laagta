@@ -86,26 +86,7 @@
                             </div>
                         </div>
 
-                        <div class="mt-4 row">
-                            <div class="col-12 col-md-6">
-                                <div class="form-group">
-                                    <label>
-                                        Venues
-                                    </label>
-                                    <p class="text-xs form-text text-muted ms-1">
-                                        Set to yes if this establishment has venues.
-                                    </p>
-                                    <div class="form-check form-switch ms-auto">
-                                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault"
-                                            onclick="notify(this)" data-type="warning"
-                                            data-content="Once a project is made private, you cannot revert it to a public project."
-                                            data-title="Warning" data-icon="ni ni-bell-55" {{ $establishment->has_venues ? 'checked':'' }}
-                                            name="has_venues">
-                                        <label class="form-check-label" for="flexSwitchCheckDefault"></label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        
                         <div class="mt-4 row">
                             <div class="col-12 col-md-6">
                                 <div class="form-group">

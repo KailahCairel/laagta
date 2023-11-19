@@ -7,30 +7,7 @@
         <div class="row">
         <div class="col-md-6">
             <div class="position-absolute w-40 top-0 start-0 h-100 d-md-block d-none">
-            <div class="oblique-image position-absolute d-flex fixed-top ms-auto h-100 z-index-0 bg-cover me-n8" style="background-image:url('{{asset('/assets/img/image-sign-up.jpg')}}')">
-                <div class="my-auto text-start max-width-350 ms-7">
-                <h1 class="mt-3 text-white font-weight-bolder">{{ __('Join us') }}</h1>
-                <div class="d-flex align-items-center">
-                    <div class="avatar-group d-flex">
-                    <a href="javascript:;" class="avatar avatar-sm rounded-circle" data-bs-toggle="tooltip" data-original-title="Jessica Rowland">
-                        <img alt="Image placeholder" src="{{asset('/assets/img/team-3.jpg')}}" class="">
-                    </a>
-                    <a href="javascript:;" class="avatar avatar-sm rounded-circle" data-bs-toggle="tooltip" data-original-title="Audrey Love">
-                        <img alt="Image placeholder" src="{{asset('/assets/img/team-4.jpg')}}" class="rounded-circle">
-                    </a>
-                    <a href="javascript:;" class="avatar avatar-sm rounded-circle" data-bs-toggle="tooltip" data-original-title="Michael Lewis">
-                        <img alt="Image placeholder" src="{{asset('/assets/img/marie.jpg')}}" class="rounded-circle">
-                    </a>
-                    <a href="javascript:;" class="avatar avatar-sm rounded-circle" data-bs-toggle="tooltip" data-original-title="Audrey Love">
-                        <img alt="Image placeholder" src="{{asset('/assets/img/team-1.jpg')}}" class="rounded-circle">
-                    </a>
-                    </div>
-                    <p class="font-weight-bold text-white text-sm mb-0 ms-2">Join 2.5M+ users</p>
-                </div>
-                </div>
-                <div class="text-start position-absolute fixed-bottom ms-7">
-                <h6 class="text-white text-sm mb-5">Copyright © 2022 SUROYTA.</h6>
-                </div>
+            <div class="oblique-image position-absolute d-flex fixed-top ms-auto h-100 z-index-0 bg-cover me-n8" style="background-image:url('{{asset('imgs/intro-logo.jpg')}}')"> 
             </div>
             </div>
         </div>
@@ -91,9 +68,7 @@
                         {{ __('Register') }}
                     </button> 
                 </div>
-                <div class="d-flex justify-content-between flex-column p-0 gap-2">
-                        <!-- Facebook Login Button -->
-                        <a href="/login/facebook" class="social-button"> <i class="fa fa-facebook"></i> Login with Facebook</a>
+                <div class="d-flex justify-content-between flex-column p-0 gap-2"> 
 
                             <!-- Google Login Button -->
                         <a href="/login/google" class="social-button google-button"> <i class="fa fa-google"></i> Login with Google</a>

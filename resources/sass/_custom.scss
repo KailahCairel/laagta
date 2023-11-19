@@ -83,7 +83,41 @@ section {
 
 .bg-cover-custom {
     height: 400px;
-    background-position: bottom;
+    background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+}
+
+
+.bg-contain {
+    background-position: center;
+    background-size: contain;
+}
+
+
+#custom-main {
+    background-position: center;
+    background-size: cover;
+}
+
+.mySwiper {
+    width: 100% !important;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+    &:after {
+        display: none;
+    }
+
+    
+    border-radius: 100%;
+    background: #000;
+    width: 40px;
+    height: 40px;
+    
+    i {
+        color: #fff;
+
+    }
 }

@@ -24,7 +24,7 @@
     </div>
     <hr class="my-0">
     <div class="row my-4">
-        <div class="col-md-6">
+        <div class="col-md-12 my-2">
             <div class="card shadow-xs border">
                 <div class="card-body">
                     <h6 class="font-weight-semibold text-lg mb-0">Description</h6>
@@ -47,8 +47,8 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-6"> 
-            <div class="row">
+        <div class="col-md-12 my-2"> 
+            <div class="row px-2">
                 <div class="card shadow-xs border">
                     <div class="card-body">
                         <h6 class="font-weight-semibold text-lg mb-0">Photos</h6>
@@ -81,8 +81,12 @@
                                         
                                 </div>
                             </div>
-                            <div class="swiper-button-prev"></div>
-                            <div class="swiper-button-next"></div>
+                            <div class="swiper-nav swiper-button-prev">
+                                <i class="fa fa-chevron-left"></i>
+                            </div>
+                            <div class="swiper-nav swiper-button-next">
+                                <i class="fa fa-chevron-right"></i>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -118,6 +122,7 @@
                         <table class="table align-items-center justify-content-center mb-0">
                             <thead class="bg-gray-100">
                                 <tr>
+                                    <th class="text-secondary text-xs font-weight-semibold opacity-7 ps-2">Thumbnail</th>
                                     <th class="text-secondary text-xs font-weight-semibold opacity-7 ps-2">Room Name</th>
                                     <th class="text-secondary text-xs font-weight-semibold opacity-7 ps-2">Capacity</th>
                                     <th class="text-secondary text-xs font-weight-semibold opacity-7 ps-2">Price</th>
@@ -128,9 +133,18 @@
                                 @foreach ($rooms as $room)
                                 <tr>
                                     <td>
+                                        @if ($room->image_path)
+                                            
+                                        <img class="w-25 h-25 img-thumbnail" src="{{ asset($room->image_path) }}" alt="">
+                                        @else
+                                            
+                                        @endif
+                                    </td>
+                                    <td>
                                         <div class="d-flex ">
                                             <div class="text-secondary text-xs font-weight-semibold opacity-7">
                                                 {{ $room->name }}
+                                                
                                             </div>
                                         </div>
                                     </td>
@@ -141,7 +155,7 @@
                                     <td class="align-middle">
                                         <div class="d-flex alignt-items-center justify-content-center">
 
-                                            <a href="#" data-bs-toggle="modal" data-bs-target="#editModal"
+                                            <a href="#" data-bs-toggle="modal" data-bs-target="#editRoomModal"
                                                 class="text-secondary font-weight-bold text-xs mx-2"
                                                 data-bs-toggle="tooltip" data-bs-title="Edit Room"
                                                 data-bs-action="{{ route('admin.update.rooms', [$establishment->id, $room->id]) }}"
@@ -149,6 +163,7 @@
                                                 data-bs-description="{{ $room->description }}"
                                                 data-bs-price="{{ $room->price }}"
                                                 data-bs-capacity="{{ $room->capacity }}"
+                                                data-bs-image="{{ $room->image_path }}"
                                                 data-room-name="{{ $room->name }}">
                                                 <i class="fa fa-edit"></i>
                                             </a>
@@ -258,89 +273,7 @@
             </div>
         </div>
         @endif
-
-        @if ($establishment->has_venues)    
-        <div class="col-lg-6 col-md-12 my-2">
-            <div class="card shadow-xs border">
-                <div class="card-header border-bottom pb-0">
-                    <div class="d-sm-flex align-items-center mb-3">
-                        <div>
-                            <h6 class="font-weight-semibold text-lg mb-0">Cottages</h6>
-                            <p class="text-sm mb-sm-0 mb-2">These are the list of all cottages.</p>
-                        </div>
-                        <div class="ms-auto d-flex"> 
-                            <button type="button" class="btn btn-sm btn-dark btn-icon d-flex align-items-center mb-0"
-                                data-bs-toggle="modal" data-bs-target="#createCottageModal">
-                                <span class="btn-inner--icon mx-2 d-flex align-items-center">
-                                    <i class="fa fa-plus"></i>
-                                </span>
-                                <span class="btn-inner--text">New Cottage</span>
-                            </button>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="card-body px-0 py-0">
-                    <div class="table-responsive p-0">
-                        <table class="table align-items-center justify-content-center mb-0">
-                            <thead class="bg-gray-100">
-                                <tr>
-                                    <th class="text-secondary text-xs font-weight-semibold opacity-7 ps-2">Cottage Name</th>
-                                    <th class="text-secondary text-xs font-weight-semibold opacity-7 ps-2">Price</th> 
-                                    <th class="text-center text-secondary text-xs font-weight-semibold opacity-7 ps-2"></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($cottages as $cottage)
-                                <tr>
-                                    <td> 
-                                        <div class="text-secondary text-xs font-weight-semibold">
-                                            {{ $cottage->name }}
-                                        </div> 
-                                    </td>
-                                    <td> 
-                                        <div class="text-secondary text-xs font-weight-semibold">
-                                            {{ $cottage->price }}
-                                        </div> 
-                                    </td> 
-                                    <td class="align-middle">
-                                        <div class="d-flex alignt-items-center justify-content-center">
-
-                                            <a href="#" data-bs-toggle="modal" data-bs-target="#editCottageModal"
-                                                class="text-secondary font-weight-bold text-xs mx-2"
-                                                data-bs-toggle="tooltip" data-bs-title="Edit cottage" 
-                                                data-bs-action="{{ route('admin.update.rides', [$establishment->id, $ride->id]) }}"
-                                                data-bs-name="{{ $cottage->name }}"
-                                                data-bs-description="{{ $cottage->description }}"
-                                                data-bs-price="{{ $cottage->price }}"
-                                                data-cottage-name="{{ $cottage->name }}"> 
-                                                
-                                                <i class="fa fa-edit"></i>
-                                            </a>
-
-                                            <a href="#" class="text-danger font-weight-bold text-xs mx-2"
-                                                data-bs-toggle="tooltip" data-bs-title="Delete cottage"
-                                                onclick="event.preventDefault(); document.getElementById('delete-cottage-form-{{ $cottage->id }}').submit();">
-                                                <i class="fa fa-trash"></i>
-                                            </a>
-                                        </div>
-
-                                        <form id="delete-cottage-form-{{ $cottage->id }}"
-                                            action="{{ route('admin.delete.cottages', [$establishment->id, $cottage->id]) }}"
-                                            method="POST" style="display: none;">
-                                            @csrf
-                                            @method('DELETE')
-                                        </form>
-                                    </td>
-                                </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-        @endif
+ 
 
     </div> 
 </div>
@@ -360,11 +293,16 @@
             </div>
             <div class="modal-body">
 
-                <form method="POST" action="{{ route('admin.store.rides', $establishment) }}" id="createService">
+                <form method="POST" action="{{ route('admin.store.rides', $establishment) }}" id="createService" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
                         <label for="name">Name</label>
                         <input class="form-control" name="name" id="name" required />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="image_path">Image</label>
+                        <input type="file" class="form-control" name="image" id="image_path" required />
                     </div>
 
                     <div class="form-group">
@@ -403,13 +341,18 @@
             </div>
             <div class="modal-body">
 
-                <form method="POST" action="" id="editRide">
+                <form method="POST" action="" id="editRide" enctype="multipart/form-data">
 
                     @csrf
                     @method('PUT')
                     <div class="form-group">
                         <label for="name">Name</label>
                         <input class="form-control" name="name" id="name" required />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="image_path">Image</label>
+                        <input type="file" class="form-control" name="image" id="image_path" required />
                     </div>
 
                     <div class="form-group">
@@ -448,11 +391,15 @@
             </div>
             <div class="modal-body">
 
-                <form method="POST" action="{{ route('admin.store.rooms', $establishment) }}" id="createRoom">
+                <form method="POST" action="{{ route('admin.store.rooms', $establishment) }}" id="createRoom" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
                         <label for="name">Room Name</label>
                         <input type="text" class="form-control" name="name" id="name" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="image_path">Image</label>
+                        <input type="file" class="form-control" name="image" id="image_path" required />
                     </div>
                     <div class="form-group">
                         <label for="description">Description</label>
@@ -483,7 +430,7 @@
 
 <!--Edit room -->
 <div class="modal fade" id="editRoomModal" tabindex="-1" role="dialog" aria-labelledby="editRoomModal"
-    aria-hidden="true">
+    aria-hidden="true" >
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -494,13 +441,19 @@
             </div>
             <div class="modal-body">
 
-                <form method="POST" action="" id="editRoom">
+                <form method="POST" action="" id="editRoom"  enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
                     <div class="form-group">
                         <label for="name">Room Name</label>
                         <input type="text" class="form-control" name="name" id="name" required />
                     </div>
+
+                    <div class="form-group">
+                        <label for="image_path">Image</label>
+                        <input type="file" class="form-control" name="image" id="image_path" required />
+                    </div>
+
                     <div class="form-group">
                         <label for="description">Description</label>
                         <textarea name="description" class="form-control" id="description" cols="30" rows="10"></textarea>
@@ -527,96 +480,7 @@
         </div>
     </div>
 </div>
-
-<!-- Add a new Cottage -->
-<div class="modal fade" id="createCottageModal" tabindex="-1" role="dialog" aria-labelledby="createCottageModal"
-    aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="createCottageModalTitle">Add Cottage</h5>
-                <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-
-                <form method="POST" action="{{ route('admin.store.cottages', $establishment) }}" id="createCottage">
-                    @csrf
-                    <div class="form-group">
-                        <label for="name">Cottage Name</label>
-                        <input type="text" class="form-control" name="name" id="name" required />
-                    </div>
-                    <div class="form-group">
-                        <label for="description">Description</label>
-                        <textarea name="description" class="form-control" id="description" cols="30" rows="10"></textarea>
-                    </div>
-                    <div class="d-flex ms-auto justify-content-between gap-1">
-                        
-                        <div class="col-auto form-group">
-                            <label for="price">Price</label>
-                            <input type="number" class="form-control" name="price" id="price" required />
-                        </div>
-                    </div>
-
-
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-white" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-dark"
-                    onclick="document.getElementById('createCottage').submit();">Save</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Edit Cottage -->
-<div class="modal fade" id="editCottageModal" tabindex="-1" role="dialog" aria-labelledby="editCottageModal"
-    aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="createCottageModalTitle">Edit Room</h5>
-                <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-
-                <form method="POST" action="" id="editCottage">
-                    @csrf
-                    @method('PUT')
-                    <div class="form-group">
-                        <label for="name">Cottage Name</label>
-                        <input type="text" class="form-control" name="name" id="name" required />
-                    </div>
-                    <div class="form-group">
-                        <label for="description">Description</label>
-                        <textarea name="description" class="form-control" id="description" cols="30" rows="10"></textarea>
-                    </div>
-                    <div class="d-flex ms-auto justify-content-between gap-1">
-                        <div class="col-auto form-group">
-                            <label for="name">Cottage Capacity</label>
-                            <input type="number" class="form-control" name="capacity" id="capacity" required />
-                        </div>
-                        <div class="col-auto form-group">
-                            <label for="price">Price</label>
-                            <input type="number" class="form-control" name="price" id="price" required />
-                        </div>
-                    </div>
-
-
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-white" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-dark"
-                    onclick="document.getElementById('editCottage').submit();">Save</button>
-            </div>
-        </div>
-    </div>
-</div>
+ 
 
 
 @endsection

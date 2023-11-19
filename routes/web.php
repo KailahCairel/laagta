@@ -20,7 +20,14 @@ Route::get('/login/{provider}/callback', [SocialController::class, 'handleProvid
 */
 
 Route::get('/', function () {
-    return view('welcome');
+
+     // Check if the user is authenticated
+    if (auth()->check()) {
+        // If authenticated, redirect to the dashboard
+        return redirect('/user/dashboard');
+    }
+
+    return view('auth.login');
 });
 
 Auth::routes();
@@ -73,6 +80,16 @@ Route::middleware(['auth', 'role:user'])->prefix('user')->name('user.')->group(f
     Route::get('/profile', [App\Http\Controllers\UserController::class, 'profile'])->name('profile');
     Route::put('/profile/update', [App\Http\Controllers\UserController::class, 'updateProfile'])->name('profile.update');
     Route::put('/password/update', [App\Http\Controllers\UserController::class, 'changePassword'])->name('profile.password');
+
+
+    Route::put('/hotels', [App\Http\Controllers\PageController::class, 'changePassword'])->name('profile.password');
+    Route::put('/activities', [App\Http\Controllers\PageController::class, 'changePassword'])->name('profile.password');
+    Route::put('/landmarkds', [App\Http\Controllers\PageController::class, 'changePassword'])->name('profile.password');
+    Route::put('/events', [App\Http\Controllers\PageController::class, 'changePassword'])->name('profile.password');
+    Route::put('/views', [App\Http\Controllers\PageController::class, 'changePassword'])->name('profile.password');
+
+
+
 
 
     Route::post('/process-form', [App\Http\Controllers\UserController::class, 'processForm'])->name('process-form');

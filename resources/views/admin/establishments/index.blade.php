@@ -13,7 +13,12 @@
                   <p class="text-sm mb-sm-0 mb-2">List of all the available establishments</p>
                 </div>
                 <div class="ms-auto d-flex"> 
-                   
+                   <a href="{{ route('admin.establishments.create') }}" class="btn btn-sm btn-primary btn-icon d-flex align-items-center mb-0 gap-2">
+                    <span class="btn-inner--icon">
+                      +
+                    </span>
+                    <span class="btn-inner--text">Create</span>
+                  </a>
                 </div>
               </div> 
             </div>

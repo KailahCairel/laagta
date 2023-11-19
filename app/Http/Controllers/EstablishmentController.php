@@ -175,13 +175,25 @@ class EstablishmentController extends Controller
             'description' => 'nullable|string',
             'capacity' => 'nullable|numeric',
             'price' => 'nullable|numeric',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
+
+        $imagePath = null;
+
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('room_images'), $imageName);
+            $imagePath = 'room_images/' . $imageName;
+        }
+ 
 
         $room = new Room([
             'name' => $request->input('name'),
             'description' => $request->input('description'),
             'capacity' => $request->input('capacity'),
             'price' => $request->input('price'),
+            'image_path' => $imagePath,
         ]);
 
         $establishment->rooms()->save($room);
@@ -197,13 +209,26 @@ class EstablishmentController extends Controller
             'description' => 'nullable|string',
             'capacity' => 'nullable|numeric',
             'price' => 'nullable|numeric',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Adjust image validation rules as needed.
         ]);
  
         // Update the attributes of the existing Ride model
+        $imagePath = $room->image_path;
+
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('room_images'), $imageName);
+            $imagePath = 'room_images/' . $imageName;
+        }
+        
+        // dd($request->hasFile('image'));
+
         $room->name = $request->input('name');
         $room->description = $request->input('description');
         $room->capacity = $request->input('capacity');
         $room->price = $request->input('price');
+        $room->image_path = $imagePath;
 
         // Save the updated model
         $room->save();
@@ -225,12 +250,23 @@ class EstablishmentController extends Controller
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
             'price' => 'nullable|numeric',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Adjust image validation rules as needed.
         ]);
+
+        $imagePath = null;
+
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('ride_images'), $imageName);
+            $imagePath = 'ride_images/' . $imageName;
+        }
 
         $ride = new Ride([
             'name' => $request->input('name'),
             'description' => $request->input('description'),
             'price' => $request->input('price'),
+            'image_path' => $imagePath,
         ]);
 
         $establishment->rides()->save($ride);
@@ -245,12 +281,24 @@ class EstablishmentController extends Controller
             'description' => 'nullable|string',
             'price' => 'nullable|numeric',
         ]);
- 
+
+        // Update the attributes of the existing Ride model
+        $imagePath = $room->image_path;
+
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('room_images'), $imageName);
+            $imagePath = 'room_images/' . $imageName;
+        }
+        
+        
         // Update the attributes of the existing Ride model
         $ride->name = $request->input('name');
         $ride->description = $request->input('description');
         $ride->price = $request->input('price');
-
+        $ride->image_path = $imagePath;
+        
         // Save the updated model
         $ride->save();
 

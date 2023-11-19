@@ -24,11 +24,11 @@
     <!-- Font Awesome Icons -->
     <script src="https://kit.fontawesome.com/349ee9c857.js" crossorigin="anonymous"></script>
     <link href="{{ asset('/assets/css/nucleo-svg.css') }}" rel="stylesheet" /> 
- 
 
     
+    
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
- 
+
 </head>
 
 <body class="">
@@ -104,6 +104,7 @@
 
   </main>
   <!--   Core JS Files   -->
+  <script src="{{ asset('/assets/js/jquery.min.js') }}"></script>
   <script src="{{ asset('/assets/js/core/popper.min.js') }}"></script>
   <script src="{{ asset('/assets/js/core/bootstrap.min.js') }}"></script>
   <script src="{{ asset('/assets/js/plugins/perfect-scrollbar.min.js') }}"></script>

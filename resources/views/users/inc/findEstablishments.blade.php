@@ -12,8 +12,8 @@
                             <form method="POST" action="{{ route('user.process-form') }}"
                                 id="createService">
                                 @csrf 
-                                <div class="d-flex flex-wrap"> 
-                                  <div class="form-group col-md-2 p-1">
+                                <div class="d-flex flex-wrap align-items-end justify-content-between"> 
+                                  <div class="form-group col-md-2 p-1 d-none">
                                       <label for="location">Where do you want to go?</label>
                                       <select class="form-control" name="location" id="location">
 
@@ -30,15 +30,14 @@
                                       <label for="categories">Services</label>
                                       <select class="form-control" name="categories" id="categories">
                                           <option value="accommodation" {{ $request->categories == "accommodation" ? 'selected':''  }}>Accomodation</option>
-                                          <option value="rides" {{ $request->categories == "rides" ? 'selected':''  }}>Rides</option>
-                                          <option value="venue" {{ $request->categories == "venue" ? 'selected':''  }}>Venue</option>
+                                          <option value="rides" {{ $request->categories == "rides" ? 'selected':''  }}>Activities</option>
                                       </select>
                                   </div> 
 
                                   {{-- If accomodation is selected --}}
                                   <div class="col-md-2 p-1 form-group" id="numberOfDaysCont">
                                       <label for="numberofdays">Length of Stay</label>
-                                      <input type="number" class="form-control" name="numberofdays"
+                                      <input type="number" min="0" class="form-control" name="numberofdays"
                                           id="numberofdays" value="{{ $request->numberofdays }}"
                                           required />
                                   </div>
@@ -46,18 +45,18 @@
 
                                   <div class="col-md-2 p-1 form-group">
                                       <label for="adults">Number of adults</label>
-                                      <input type="number" class="form-control" name="adults"
+                                      <input type="number" min="0" class="form-control" name="adults"
                                           id="adults" value="{{ $request->adults }}" required />
                                   </div>
                                   <div class="col-md-2 p-1 form-group">
                                       <label for="childs">Number of childrens</label>
-                                      <input type="number" class="form-control" name="childs"
+                                      <input type="number" min="0" class="form-control" name="childs"
                                           id="childs" value="{{ $request->childs }}" required />
                                   </div> 
   
                                   <div class="col-md-2 p-1 form-group">
-                                      <label for="budget">What is your budget?</label>
-                                      <input type="number" class="form-control" name="budget"
+                                      <label for="budget">Your budget?</label>
+                                      <input type="number" min="0" class="form-control" name="budget"
                                           id="budget" value="{{ $request->budget }}" required />
                                   </div> 
                                 </div> 

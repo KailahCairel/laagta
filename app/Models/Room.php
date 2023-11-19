@@ -15,7 +15,7 @@ class Room extends Model
         'establishment_id',
         'price',
         'capacity', // Add the 'capacity' field
-        // Add other room attributes here
+        'image_path',
     ];
 
     // Define relationships here, for example:
