@@ -232,19 +232,28 @@
             <div class="col-md-3">
 
               <div class="card p-2">
+                <div class="p-2">
+                  <h6>Sort by Price</h6>
+                  <select class="form-control" id="sortByPrice">
+                      <option value="hightolow">High to Low</option>
+                      <option value="lowtohigh">Low to High</option>
+                  </select>
+                </div>
 
                 <div class="p-2">
-                  <h4>Price</h4>
+                  <h6>Price</h6>
                   <input class="my-2" type="text" id="amount" readonly style="border:0; color:#b10002; font-weight:bold;">
                 
                   <div id="slider" class="mx-2"></div>
                 </div>
+
+                
                   
               </div>
               
             </div>
             <div class="col-md-9">
-              <div class="row" id="roomsContainer">
+              <div class="row" id="dataContainer">
                 @foreach ($establishments as $establishment)
                    
                   @foreach ($establishment->rooms as $accommodation)
@@ -261,10 +270,10 @@
                               <span class="badge badge-warning text-dark">{{ $accommodation->name }}</span>
 
                               @if ($accommodation->image_path)
-                                <img class="img-rounded" style="object-fit: cover;" src="{{ asset($accommodation->image_path) }}" alt=""> 
+                                <img class="img-rounded my-2 " style="object-fit: cover; max-width: 100%; min-height: 250px;" src="{{ asset($accommodation->image_path) }}" alt=""> 
                                 @else
 
-                                <img class="img-rounded" style="object-fit: cover;" src="{{ asset('/imgs/intro-logo.png') }}" alt=""> 
+                                <img class="img-rounded my-2 " style="object-fit: cover; max-width: 100%; min-height: 250px;" src="{{ asset('/imgs/intro-logo.png') }}" alt=""> 
                               @endif
 
                               <h6 class="mb-2 text-small">{{ Str::limit($establishment->name, 20, '...') }}</h6>
@@ -296,9 +305,17 @@
             <div class="col-md-3">
 
               <div class="card p-2">
+                <div class="p-2">
+                  <h6>Sort by Price</h6>
+                  <select class="form-control" id="sortByPrice">
+                      <option value="hightolow">High to Low</option>
+                      <option value="lowtohigh">Low to High</option>
+                  </select>
+                </div>
 
                 <div class="p-2">
-                  <h4>Price</h4>
+
+                  <h6>Price</h6>
                   <input class="my-2" type="text" id="amount" readonly style="border:0; color:#b10002; font-weight:bold;">
                 
                   <div id="slider" class="mx-2"></div>
@@ -308,7 +325,7 @@
               
             </div>
             <div class="col-md-9">
-              <div class="row" id="roomsContainer">
+              <div class="row" id="dataContainer">
                 @foreach ($establishments as $establishment)
                    
                   @foreach ($establishment->rides as $activity)
@@ -325,10 +342,10 @@
                               <span class="badge badge-warning text-dark">{{ $activity->name }}</span>
 
                               @if ($activity->image_path)
-                                <img class="img-rounded" style="object-fit: cover;" src="{{ asset($activity->image_path) }}" alt=""> 
+                                <img class="img-rounded my-2 " style="object-fit: cover; max-width: 100%; min-height: 250px;" src="{{ asset($activity->image_path) }}" alt=""> 
                                 @else
 
-                                <img class="img-rounded" style="object-fit: cover;" src="{{ asset('/imgs/intro-logo.png') }}" alt=""> 
+                                <img class="img-rounded my-2 " style="object-fit: cover; max-width: 100%; min-height: 250px;" src="{{ asset('/imgs/intro-logo.png') }}" alt=""> 
                               @endif
 
                               <h6 class="mb-2 text-small">{{ Str::limit($establishment->name, 20, '...') }}</h6>
@@ -369,7 +386,7 @@
                 $("#amount").val("$" + ui.values[0] + " - $" + ui.values[1]);
 
                 // Loop through each room card
-                $("#roomsContainer .col-md-4").each(function () {
+                $("#dataContainer .col-md-4").each(function () {
                     var roomPrice = parseFloat($(this).attr("data-price"));
 
                     // Check if the data-price is less than the lower value of the slider
@@ -383,6 +400,34 @@
         });
         $("#amount").val("$" + $("#slider").slider("values", 0) +
             " - $" + $("#slider").slider("values", 1));
+
+
+             // Function to sort rooms based on data-price attribute
+        function sortData(order) {
+            var rooms = $('#dataContainer .col-md-4').toArray();
+
+            rooms.sort(function (a, b) {
+                var priceA = parseFloat($(a).data('price'));
+                var priceB = parseFloat($(b).data('price'));
+
+                if (order === 'hightolow') {
+                    return priceB - priceA;
+                } else {
+                    return priceA - priceB;
+                }
+            });
+
+            $('#dataContainer').empty().append(rooms);
+        }
+
+        // Event listener for sorting select change
+        $('#sortByPrice').change(function () {
+            var selectedOption = $(this).val();
+            sortData(selectedOption);
+        });
+
+        // Initial sorting (default: high to low)
+        sortData('hightolow');
     });
   </script>
 @endsection

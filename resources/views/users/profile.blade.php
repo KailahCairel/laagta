@@ -82,10 +82,12 @@
                       <ul class="list-group">
                           <li class="list-group-item border-0 ps-0 text-dark font-weight-semibold pt-0 pb-1 text-sm"><span
                                   class="text-secondary">Name:</span> &nbsp; {{ $user->name }}</li> 
-                          <li class="list-group-item border-0 ps-0 text-dark font-weight-semibold pb-1 text-sm"><span
-                                  class="text-secondary">Email:</span> &nbsp; {{ $user->email }}</li>
-                          <li class="list-group-item border-0 ps-0 text-dark font-weight-semibold pb-1 text-sm"><span
-                                  class="text-secondary">Mobile:</span> &nbsp; {{ $user->phone }}</li>
+                          <li class="list-group-item border-0 ps-0 text-dark font-weight-semibold pb-1 text-sm">
+    <span class="text-secondary">Email:</span> &nbsp; {{ substr($user->email, 0, 5) . str_repeat('*', strlen($user->email) - 5) }}
+</li>
+<li class="list-group-item border-0 ps-0 text-dark font-weight-semibold pb-1 text-sm">
+    <span class="text-secondary">Mobile:</span> &nbsp; {{ substr($user->phone, 0, 5) . str_repeat('*', strlen($user->phone) - 5) }}
+</li>
                           <li class="list-group-item border-0 ps-0 text-dark font-weight-semibold pb-1 text-sm"><span
                                   class="text-secondary">Function:</span> &nbsp; {{ $user->job }}</li>
                           <li class="list-group-item border-0 ps-0 text-dark font-weight-semibold pb-1 text-sm"><span

@@ -5,7 +5,7 @@
     <div class="container">
         <div class="row my-6">
           <div class="col-md-12">
-            <h2 class="text-center">Landmarks</h2>
+            <h2 class="text-center">Views</h2>
           </div>
         </div>
         <div class="row my-6">  

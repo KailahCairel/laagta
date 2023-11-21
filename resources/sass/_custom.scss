@@ -121,3 +121,16 @@ section {
 
     }
 }
+
+
+.map iframe{ width: 100%;}
+
+
+.logo {
+    height: 40px;
+    width: 100%; 
+
+    &.admin {
+        height: 50px;
+    }
+}

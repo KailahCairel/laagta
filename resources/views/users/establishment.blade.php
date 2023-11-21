@@ -49,10 +49,10 @@
                           <div class="card-body">
                               
                               @if ($room->image_path)
-                              <img class="img-rounded" style="object-fit: contain; width: 100%" src="{{ asset($room->image_path) }}" alt=""> 
+                              <img class="img-rounded mb-2" style="border-radius: 10px; object-fit: cover; width: 100%; min-height: 250px" src="{{ asset($room->image_path) }}" alt=""> 
                               @else
                               
-                              <img class="img-rounded" style="object-fit: contain; width: 100%" src="{{ asset('/imgs/intro-logo.png') }}" alt=""> 
+                              <img class="img-rounded mb-2" style="border-radius: 10px; object-fit: cover; width: 100%; min-height: 250px" src="{{ asset('/imgs/intro-logo.png') }}" alt=""> 
                               @endif 
                               <h6>{{ $room->name }}</h6>
                               <div class="d-flex justify-content-between align-items-center">
@@ -79,10 +79,10 @@
                           <div class="card-body">
                               
                               @if ($rides->image_path)
-                              <img class="img-rounded" style="object-fit: contain; width: 100%" src="{{ asset($rides->image_path) }}" alt=""> 
+                              <img class="img-rounded mb-2" style="border-radius: 10px; object-fit: cover; width: 100%; min-height: 250px" src="{{ asset($rides->image_path) }}" alt=""> 
                               @else
                               
-                              <img class="img-rounded" style="object-fit: contain; width: 100%" src="{{ asset('/imgs/intro-logo.png') }}" alt=""> 
+                              <img class="img-rounded mb-2" style="border-radius: 10px; object-fit: cover; width: 100%; min-height: 250px" src="{{ asset('/imgs/intro-logo.png') }}" alt=""> 
                               @endif
                               
                               <h6 class="">{{ $rides->name }}</h6>
@@ -98,6 +98,10 @@
         </div>
     @endif   
      
+</div>
+
+<div class="map">
+    {!! $establishment->maps !!}
 </div>
 
 @endsection

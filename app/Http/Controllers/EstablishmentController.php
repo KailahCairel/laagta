@@ -52,6 +52,8 @@ class EstablishmentController extends Controller
             'has_accomodation' => 'nullable|string', // Change the validation rule for has_accomodation to string
             'has_venues' => 'nullable|string', // Change the validation rule for has_venues to string
             'has_rides' => 'nullable|string', // Change the validation rule for has_rides to string
+            'cattegories' => 'nullable|string', // Change the validation rule for has_rides to string
+            'maps' => 'nullable|string', // Change the validation rule for has_rides to string
         ]);
 
         // Convert "on" to true, and any other value to false for boolean fields
@@ -110,6 +112,8 @@ class EstablishmentController extends Controller
 
     public function update(Request $request, string $id)
     {
+        // dd($request);
+
         // Validate input
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
@@ -124,7 +128,9 @@ class EstablishmentController extends Controller
             'has_accomodation' => 'nullable|string', // Change the validation rule for has_accomodation to string
             'has_venues' => 'nullable|string', // Change the validation rule for has_venues to string
             'has_rides' => 'nullable|string', // Change the validation rule for has_rides to string
-        ]);
+            'categories' => 'nullable|array', // Change the validation rule for has_rides to string
+            'maps' => 'nullable|string', // Change the validation rule for has_rides to string
+        ]); 
 
         // Convert "on" to true, and any other value to false for boolean fields
         $validatedData['status'] = $request->input('status') === 'on' ? true : false;
@@ -136,7 +142,9 @@ class EstablishmentController extends Controller
         $establishment = Establishment::findOrFail($id);
 
         // Update the establishment with the validated data
-        $establishment->update($validatedData);
+        $update = $establishment->update($validatedData);
+
+        // dd($update);
 
         // Upload and associate multiple images with the establishment
         if ($request->hasFile('images')) {
@@ -283,7 +291,7 @@ class EstablishmentController extends Controller
         ]);
 
         // Update the attributes of the existing Ride model
-        $imagePath = $room->image_path;
+        $imagePath = $ride->image_path;
 
         if ($request->hasFile('image')) {
             $image = $request->file('image');

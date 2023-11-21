@@ -12,6 +12,14 @@
                         <h6 class="mb-0">Update Establishment</h6>
                         <p class="mb-4 text-sm">Update {{ $establishment->name }}</p>
 
+                        <select name="categories[]" id="categories" class="form-control" multiple>
+                            <!-- Assuming $categories is an array of available categories -->
+                            <option value="hotel">Hotel</option>
+                            <option value="activity">Activity</option>
+                            <option value="landmark">Landmark</option>
+                            <option value="event">Event</option>
+                            <option value="attraction">Tourist Attraction</option>
+                        </select>
 
                         <div class="form-group {{ $errors->has('name') ? 'has-danger' : 'has-success' }}">
                             <label for="name" class="form-label">Establishment Name</label>
@@ -157,6 +165,11 @@
                         <div class="form-group">
                             <label class="mt-4 form-label">Location</label>    
                             <input class="form-control" type="text" name="location" value="{{ old('location', $establishment->location) }}">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="mt-4 form-label">Embed Map</label>    
+                            <input class="form-control" type="text" name="maps" value="{{ old('maps', $establishment->maps) }}">
                         </div>
 
                         <div class="mt-4 d-flex justify-content-end">

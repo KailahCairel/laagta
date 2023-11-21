@@ -18,6 +18,15 @@
                         <p class="mb-4 text-sm">Create new establishment</p>
 
 
+                        <select name="categories[]" id="categories" class="form-control {{ $errors->has('categories') ? 'is-invalid' : 'is-valid' }}" multiple>
+                            <!-- Assuming $categories is an array of available categories -->
+                            <option value="hotel">Hotel</option>
+                            <option value="activity">Activity</option>
+                            <option value="landmark">Landmark</option>
+                            <option value="event">Event</option>
+                            <option value="attraction">Tourist Attraction</option>
+                        </select>
+
                         <div class="form-group {{ $errors->has('name') ? 'has-danger' : 'has-success' }}">
                             <label for="name" class="form-label">Establishment Name</label>
                             <input type="text" class="form-control {{ $errors->has('name') ? 'is-invalid' : 'is-valid' }}" id="name" name="name"  onfocus="focused(this)"
@@ -166,8 +175,16 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="mt-4 form-label">Location</label>    
+                            <label class="mt-4 form-label">Location</label> 
                             <input class="form-control" type="text" name="location" value="{{ old('location', $establishment->location) }}">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="mt-4 form-label">Embed Map</label>
+                            <p class="form-text text-muted text-xs ms-1">
+                                Embed a map from google maps.
+                            </p>    
+                            <input class="form-control" type="text" name="maps" value="{{ old('maps', $establishment->maps) }}">
                         </div>
 
                         

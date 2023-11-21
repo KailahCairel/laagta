@@ -82,11 +82,11 @@ Route::middleware(['auth', 'role:user'])->prefix('user')->name('user.')->group(f
     Route::put('/password/update', [App\Http\Controllers\UserController::class, 'changePassword'])->name('profile.password');
 
 
-    Route::put('/hotels', [App\Http\Controllers\PageController::class, 'changePassword'])->name('profile.password');
-    Route::put('/activities', [App\Http\Controllers\PageController::class, 'changePassword'])->name('profile.password');
-    Route::put('/landmarkds', [App\Http\Controllers\PageController::class, 'changePassword'])->name('profile.password');
-    Route::put('/events', [App\Http\Controllers\PageController::class, 'changePassword'])->name('profile.password');
-    Route::put('/views', [App\Http\Controllers\PageController::class, 'changePassword'])->name('profile.password');
+    Route::get('/hotels', [App\Http\Controllers\PageController::class, 'index'])->name('hotels');
+    Route::get('/activities', [App\Http\Controllers\PageController::class, 'index'])->name('activities');
+    Route::get('/landmarkds', [App\Http\Controllers\PageController::class, 'index'])->name('landmarkds');
+    Route::get('/events', [App\Http\Controllers\PageController::class, 'index'])->name('events');
+    Route::get('/views', [App\Http\Controllers\PageController::class, 'index'])->name('attractions');
 
 
 

@@ -275,7 +275,11 @@
         @endif
  
 
-    </div> 
+    </div>
+
+    <div class="map">
+        {!! $establishment->maps !!}
+    </div>
 </div>
 
 

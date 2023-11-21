@@ -1,8 +1,10 @@
   <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 bg-primary fixed-start " id="sidenav-main">
     <div class="sidenav-header">
       <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
-      <a class="navbar-brand d-flex align-items-center m-0" href=" https://demos.creative-tim.com/corporate-ui-dashboard/pages/dashboard.html " target="_blank">
-        <span class="font-weight-bold text-lg">SUROYTA</span>
+      <a class="navbar-brand d-flex align-items-center m-0" href="{{ route('admin.dashboard') }}">
+        <span class="font-weight-bold text-lg">
+          <img class="logo admin" src="{{ asset('imgs/lt.png') }}" alt="">
+        </span>
       </a>
     </div>
     <div class="collapse navbar-collapse px-4  w-auto " id="sidenav-collapse-main">

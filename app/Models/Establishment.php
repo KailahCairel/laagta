@@ -21,7 +21,9 @@ class Establishment extends Model
         'has_accomodation',
         'has_venues',
         'has_rides',
-        'destination_id'
+        'destination_id',
+        'categories',
+        'maps'
     ];
     
     public function destination()

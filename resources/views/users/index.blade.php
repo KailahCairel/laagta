@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<section id="custom-main" style="height: 100vh; background-image: url('{{asset('/imgs/manolofortich.jpg')}}')">
+<section id="custom-main" style="height: 100vh; background-repeat: no=repeat; background-image: url('{{asset('/imgs/manolofortich.jpg')}}')">
     <div class="container h-100">
         <div class="d-flex flex-column justify-content-center align-items-center h-100">
             <div class="content w-100">
@@ -87,31 +87,34 @@
 </section>
 
 
-<div class="container my-3 py-3" id="user">
+<div class="container my-6 py-3" id="user">
     
     <section id="establishments">
-        <div class="row mb-6">
-            @foreach ($establishments as $establishment)
-            <div class="col-lg-4 col-sm-6 my-2">
+        <h2 class="text-center mb-1 font-weight-bold">Top Destinations in Manolo Fortich</h2>
+        <div class="row">
+            @foreach ($establishments->take(6) as $establishment)
+                <div class="col-lg-2 col-sm-4 my-2">
 
-                <div class="card">
-                    <div class="card-body">
+                    <div class="card" style="background: transparent; box-shadow: unset;">
+                        <div class="card-body text-center">
+                            <a href="{{ route('user.establishment', $establishment->id) }}">
 
-                        @if (count($establishment->images) > 0)
-                        <img src="{{ asset('storage/' . $establishment->images[0]->image_path) }}" alt="">
-                        @endif
+                                @if (count($establishment->images) > 0)
+                                <div class="d-flex justify-content-center">
+                                    <img style="border-radius: 100%; height: 150px; width: 150px; object-fit: cover;" src="{{ asset('storage/' . $establishment->images[0]->image_path) }}" alt="">
+                                </div>
+                                @endif
 
-                        <h4>{{ $establishment->name }}</h4>
-                        <p>{{ Str::limit($establishment->description, 150) }}</p>
+                                <h6>{{ Str::limit($establishment->name, 35) }}</h6>
+    
+
+                            </a>
+
+                        </div> 
                     </div>
-                    <div class="card-footer">
-                        <a class="btn btn-primary" href="{{ route('user.establishment', $establishment->id) }}">View
-                            Details</a>
-                    </div>
+
+
                 </div>
-
-
-            </div>
             @endforeach
         </div>
     </section>
